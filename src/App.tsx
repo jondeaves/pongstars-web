@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react';
 import Axios, { AxiosResponse } from 'axios';
+import React, { useEffect, useState } from 'react';
 
 import './App.css';
 
-interface Suggestion {
-  id: number;
-  payload: Suggestion,
-  createdAt: string;
-  updatedAt: string;
+interface ISuggestion {
+  title: string;
+  description: string;
+  votes: number;
 }
 
-interface SuggestionsResp {
+interface ISuggestionsResp {
   meta: {
     totalPages: number;
     totalRecords: number;
@@ -24,12 +23,17 @@ interface SuggestionsResp {
     next: string|null;
     last: string|null;
   },
-  data: Suggestion[];
+  data: Array<{
+    id: number;
+    payload: ISuggestion,
+    createdAt: string;
+    updatedAt: string;
+  }>;
 }
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true);
-  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+  const [suggestions, setSuggestions] = useState<ISuggestion[]>([]);
 
   const [newTitle, setNewTitle] = useState('');
   const [newDescription, setNewDescription] = useState('');
@@ -45,9 +49,15 @@ const App: React.FC = () => {
         Authorization: process.env.REACT_APP_API_KEY,
       }
     })
-    .then((resp: AxiosResponse<SuggestionsResp>) => {
+    .then((resp: AxiosResponse<ISuggestionsResp>) => {
       setLoading(false);
-      setSuggestions(resp.data.data);
+      setSuggestions(resp.data.data.map(suggestionResp => ({
+        description: suggestionResp.payload.description,
+        title: suggestionResp.payload.title,
+        votes: suggestionResp.payload.votes,
+      })));
+
+
     })
     .catch(() => {
       setLoading(false);
@@ -70,10 +80,11 @@ const App: React.FC = () => {
     }
 
     setFormError('');
+
     Axios.post(`${process.env.REACT_APP_API_ENDPOINT}store/pongstars/suggestions`, {
       payload: {
-        title: newTitle,
         description: newDescription,
+        title: newTitle,
         votes: 0,
       }
     }, {
@@ -84,6 +95,7 @@ const App: React.FC = () => {
     .then(() => {
       loadSuggestions();
     })
+    // tslint:disable-next-line:no-console
     .catch(console.error);
   }
 
@@ -110,9 +122,20 @@ const App: React.FC = () => {
         </form>
 
         {!loading && suggestions.length > 0 &&
-        <ul>
-        {suggestions.map(suggestion => <li key={suggestion.id}>{JSON.stringify(suggestion)}</li>)}
-        </ul>
+        <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Votes</th>
+          </tr>
+        </thead>
+        {suggestions.map((suggestion, idx) => <tr key={idx}>
+          <td>{suggestion.title}</td>
+          <td>{suggestion.description}</td>
+          <td>{suggestion.votes}</td>
+        </tr>)}
+        </table>
         }
       </header>
     </div>

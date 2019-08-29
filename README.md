@@ -1,4 +1,6 @@
-# Pongstars Wweb
+# Pongstars Web
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b13fefd3-255e-4a66-9665-63b3cac0c89d/deploy-status)](https://app.netlify.com/sites/pongstars-web/deploys)
 
 Simple UI to view and contribute ideas to the Pongstars app.
 
