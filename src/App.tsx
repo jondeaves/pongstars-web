@@ -40,7 +40,7 @@ const App: React.FC = () => {
   }, []);
 
   const loadSuggestions = () => {
-    Axios.get('https://api.dev.morpus.net/store/pongstars/suggestions', {
+    Axios.get(`${process.env.REACT_APP_API_ENDPOINT}store/pongstars/suggestions`, {
       headers: {
         Authorization: process.env.REACT_APP_API_KEY,
       }
@@ -70,7 +70,7 @@ const App: React.FC = () => {
     }
 
     setFormError('');
-    Axios.post('https://api.morpus.net/store/pongstars/suggestions', {
+    Axios.post(`${process.env.REACT_APP_API_ENDPOINT}store/pongstars/suggestions`, {
       payload: {
         title: newTitle,
         description: newDescription,

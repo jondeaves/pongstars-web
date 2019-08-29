@@ -10,8 +10,9 @@ Add a .env file at the root of the project with the following format
 
 ```shell
 REACT_APP_API_KEY=[MORPUS_API_KEY]
+REACT_APP_API_ENDPOINT=[MORPUS_API_ENDPOINT]
 ```
 
 ### Production
 
-Ensure the environment variable above is defined during the build step
+Ensure the environment variables above are defined during the build step
