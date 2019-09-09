@@ -6,7 +6,8 @@ export const renderer = createRenderer({
   plugins: [
     namedKeys({
       atDesktop: '@media (min-width: 1024px)',
+      beforeDesktop: '@media (max-width: 1023px)',
     }),
     unit(),
-  ]
-})
+  ],
+});

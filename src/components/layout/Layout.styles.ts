@@ -1,6 +1,6 @@
 import { padding } from 'polished';
 
-import { IStyles } from './Layout.types'
+import { IStyles } from './Layout.types';
 
 const styles: IStyles = {
   left: {
@@ -10,7 +10,7 @@ const styles: IStyles = {
     ...padding(20),
 
     atDesktop: {
-      ...padding(57, 40, 40, 40),
+      ...padding(47, 40, 40, 40),
     },
   },
   main: {
@@ -27,7 +27,7 @@ const styles: IStyles = {
   right: {
     backgroundColor: '#111525',
     flexGrow: 1,
-    ...padding(16, 66, 66, 24),
+    ...padding(36, 16, 66, 24),
 
     atDesktop: {
       ...padding(36, null, null, null),

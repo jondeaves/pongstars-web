@@ -17,7 +17,7 @@ const Changelog: React.FC<IProps> = (props: IProps) => {
       {items.map((item, idx) => (
         <ChangelogItem key={idx} date={item.date} items={item.items} />
       ))}
-      <a href="#" onClick={onClick}>
+      <a href="#" onClick={onClick} className={css(styles.viewAll)}>
         View All
       </a>
     </div>

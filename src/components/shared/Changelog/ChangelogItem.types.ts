@@ -8,5 +8,7 @@ export interface IProps {
 }
 
 export interface IStyles {
-  main: IStyle;
+  main: IStyle & {
+    atDesktop: IStyle;
+  };
 }

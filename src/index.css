@@ -17,10 +17,10 @@ h1 {
   font-style: normal;
   font-weight: 900;
   font-size: 60px;
-  line-height: 84px;
   align-items: center;
   display: flex;
   letter-spacing: 0.1em;
+  margin-bottom: 16px;
   text-transform: uppercase;
 }
 
@@ -52,6 +52,16 @@ h4 {
   font-family: Lato;
   font-style: normal;
   font-weight: 900;
+  font-size: 24px;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+}
+
+h5 {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: 900;
   font-size: 16px;
   line-height: 28px;
   display: flex;
@@ -70,4 +80,12 @@ p {
   align-items: center;
 
   color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 1023px) {
+  h1 { font-size: 32px; }
+  h2 { font-size: 28px; }
+  h3 { font-size: 26px; }
+  h4 { font-size: 17px; }
+  h5 { font-size: 14px; }
 }

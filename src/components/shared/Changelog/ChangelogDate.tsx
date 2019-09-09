@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import React from 'react';
 import { useFela } from 'react-fela';
 
@@ -10,7 +11,9 @@ const ChangelogDate: React.FC<IProps> = (props: IProps) => {
 
   return (
     <div className={css(styles.main)}>
-      <p>{value}</p>
+      <div className={css(styles.inner)}>
+        <p>{format(new Date(value), 'dd.MM')}</p>
+      </div>
     </div>
   );
 };

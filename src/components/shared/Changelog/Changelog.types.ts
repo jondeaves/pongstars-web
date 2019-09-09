@@ -8,4 +8,5 @@ export interface IProps {
 
 export interface IStyles {
   main: IStyle;
+  viewAll: IStyle;
 }

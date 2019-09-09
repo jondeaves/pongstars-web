@@ -5,5 +5,12 @@ export interface IProps {
 }
 
 export interface IStyles {
-  main: IStyle;
+  main: IStyle & {
+    atDesktop: IStyle & {
+      '&:before': IStyle;
+    };
+  };
+  inner: IStyle & {
+    '> p': IStyle;
+  };
 }

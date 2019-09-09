@@ -10,8 +10,8 @@ const ChangelogEntry: React.FC<IProps> = (props: IProps) => {
 
   return (
     <div className={css(styles.main)}>
-      <p>{title}</p>
-      <p>{description}</p>
+      <h4 className={css(styles.title)}>{title}</h4>
+      <p className={css(styles.description)}>{description}</p>
     </div>
   );
 };
