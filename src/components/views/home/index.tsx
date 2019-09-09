@@ -1,15 +1,13 @@
 import React from 'react';
 
 import Recent from './Recent';
+import Suggestions from './Suggestions';
 
 const Home: React.FC = () => {
   return (
     <div>
       <Recent />
-
-      <h2>Suggest a feature</h2>
-      <h3>popular suggestions</h3>
-      <h4>title</h4>
+      <Suggestions />
     </div>
   );
 };
