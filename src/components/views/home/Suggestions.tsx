@@ -4,8 +4,8 @@ import { useFela } from 'react-fela';
 import ISuggestion from '../../../types/ISuggestion';
 import SuggestionList from '../../shared/SuggestionList';
 
-import styles from './Recent.styles';
-import { IProps } from './Recent.types';
+import styles from './Suggestions.styles';
+import { IProps } from './Suggestions.types';
 
 const suggestions: ISuggestion[] = [
   {
@@ -30,7 +30,7 @@ const Suggestion: React.FC<IProps> = (props: IProps) => {
 
   return (
     <div className={css(styles.main)}>
-      <h1>Suggest a Feature</h1>
+      <h2 className={css(styles.title)}>Suggest a Feature</h2>
       <p>
         Welcome to the PongStars feature request area. If you’ve got any ideas you think would really improve the app
         then leave us a suggestion below, if it get’s really popluar we’ll add it to our roadmap! XD

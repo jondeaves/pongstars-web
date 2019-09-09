@@ -12,8 +12,6 @@ const SuggestionList: React.FC<IProps> = (props: IProps) => {
 
   return (
     <div className={css(styles.main)}>
-      <h2>Suggest a feature</h2>
-
       <h3>popular suggestions</h3>
 
       {items.map((item, idx) => (

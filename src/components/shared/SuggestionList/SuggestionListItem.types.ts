@@ -7,5 +7,12 @@ export interface IProps {
 }
 
 export interface IStyles {
+  content: IStyle;
+  description: IStyle;
   main: IStyle;
+  title: IStyle;
+  voteCount: IStyle;
+  voteDown: IStyle;
+  voteUp: IStyle;
+  votes: IStyle;
 }
