@@ -7,7 +7,7 @@ import styles from './SuggestionList.styles';
 import { IProps } from './SuggestionList.types';
 
 const SuggestionList: React.FC<IProps> = (props: IProps) => {
-  const { items } = props;
+  const { items, updateVotes } = props;
   const { css } = useFela<null, IProps>(props);
 
   return (
@@ -15,7 +15,7 @@ const SuggestionList: React.FC<IProps> = (props: IProps) => {
       <h3>popular suggestions</h3>
 
       {items.map((item, idx) => (
-        <SuggestionListItem key={idx} item={item} />
+        <SuggestionListItem key={idx} item={item} updateVotes={updateVotes} />
       ))}
     </div>
   );

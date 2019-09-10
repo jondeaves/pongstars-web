@@ -4,6 +4,7 @@ import ISuggestion from '../../../types/ISuggestion';
 
 export interface IProps {
   item: ISuggestion;
+  updateVotes: (id: number, votes: number) => void;
 }
 
 export interface IStyles {

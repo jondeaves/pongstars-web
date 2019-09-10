@@ -6,42 +6,49 @@ import ISuggestion from '../../../types/ISuggestion';
 import ISuggestionsResp from '../../../types/ISuggestionResponse';
 
 import Loader from '../../shared/Loader';
+import Snackbar from '../../shared/Snackbar';
 import SuggestionList from '../../shared/SuggestionList';
 
 import styles from './Suggestions.styles';
 import { IProps } from './Suggestions.types';
 
-// const suggestions: ISuggestion[] = [
-//   {
-//     description: 'Use a coin toss to decide who gets to choose what side to start on',
-//     title: 'Coin Toss',
-//     votes: 98,
-//   },
-//   {
-//     description: 'Show your record against a certain person. e.g. if i pick Richard it will show 120 wins - 0 losses.',
-//     title: 'Statistics vs User',
-//     votes: 42,
-//   },
-//   {
-//     description: 'Auto win button when you get drawn against Andy Li.',
-//     title: 'Trolling',
-//     votes: -2,
-//   },
-// ];
-
 const Suggestion: React.FC<IProps> = (props: IProps) => {
   const { css } = useFela<null, IProps>(props);
   const [loading, setLoading] = useState<boolean>(true);
   const [suggestions, setSuggestions] = useState<ISuggestion[]>([]);
+  const [snackbarMessage, setSnackbarMessage] = useState<string>('');
 
   useEffect(() => {
     loadSuggestions();
   }, []);
 
+  const updateVotes = async (id: number, votes: number) => {
+    try {
+      await Axios.patch(
+        `${process.env.REACT_APP_API_ENDPOINT}store/pongstars/suggestions/${id}`,
+        {
+          payload: {
+            votes,
+          }
+        },
+        {
+          headers: {
+            Authorization: process.env.REACT_APP_API_KEY,
+          },
+        },
+      );
+
+      setSnackbarMessage('');
+      loadSuggestions();
+    } catch (err) {
+      setSnackbarMessage(err.message);
+    }
+  }
+
   const loadSuggestions = async () => {
     try {
       const resp: AxiosResponse<ISuggestionsResp> = await Axios.get(
-        `${process.env.REACT_APP_API_ENDPOINT}store/pongstars/suggestions`,
+        `${process.env.REACT_APP_API_ENDPOINT}store/pongstars/suggestions?pageSize=5`,
         {
           headers: {
             Authorization: process.env.REACT_APP_API_KEY,
@@ -54,6 +61,7 @@ const Suggestion: React.FC<IProps> = (props: IProps) => {
         resp.data.data
           .map(suggestionResp => ({
             description: suggestionResp.payload.description,
+            id: suggestionResp.id,
             title: suggestionResp.payload.title,
             votes: suggestionResp.payload.votes,
           }))
@@ -65,6 +73,10 @@ const Suggestion: React.FC<IProps> = (props: IProps) => {
     }
   };
 
+  const onCloseSnackbar = () => {
+    setSnackbarMessage('');
+  }
+
   return (
     <div className={css(styles.main)}>
       <h2 className={css(styles.title)}>Suggest a Feature</h2>
@@ -74,7 +86,9 @@ const Suggestion: React.FC<IProps> = (props: IProps) => {
       </p>
 
       {loading && <Loader />}
-      {!loading && <SuggestionList items={suggestions} />}
+      {!loading && <SuggestionList items={suggestions} updateVotes={updateVotes} />}
+
+      <Snackbar message={snackbarMessage} onClose={onCloseSnackbar} />
     </div>
   );
 };

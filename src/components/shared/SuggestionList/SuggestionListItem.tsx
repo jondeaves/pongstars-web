@@ -6,19 +6,23 @@ import styles from './SuggestionListItem.styles';
 import { IProps } from './SuggestionListItem.types';
 
 const SuggestionListItem: React.FC<IProps> = (props: IProps) => {
-  const { item } = props;
+  const { item, updateVotes } = props;
   const { css } = useFela<null, IProps>(props);
+
+  const onVoteUp = () => {
+    updateVotes(item.id, item.votes + 1);
+  }
+
+  const onVoteDown = () => {
+    updateVotes(item.id, item.votes - 1);
+  }
 
   return (
     <div className={css(styles.main)}>
       <div className={css(styles.votes)}>
-        <p className={css(styles.voteUp)}>
-          <KeyboardArrowUp />
-        </p>
+        <KeyboardArrowUp className={css(styles.voteUp)} onClick={onVoteUp} />
         <p className={css(styles.voteCount)}>{item.votes}</p>
-        <p className={css(styles.voteDown)}>
-          <KeyboardArrowDown />
-        </p>
+        <KeyboardArrowDown className={css(styles.voteDown)} onClick={onVoteDown} />
       </div>
       <div className={css(styles.content)}>
         <h4 className={css(styles.title)}>{item.title}</h4>

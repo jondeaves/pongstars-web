@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider as FelaProvider } from 'react-fela';
+import { RendererProvider as FelaProvider } from 'react-fela';
 
 import { renderer } from './config/Fela';
 
