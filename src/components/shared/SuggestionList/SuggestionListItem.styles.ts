@@ -4,7 +4,7 @@ import { IStyles } from './SuggestionListItem.types';
 
 const styles: IStyles = {
   content: {
-    ...margin(null, null, null, 24),
+    ...margin(5, null, null, 24),
   },
 
   description: {
@@ -12,11 +12,10 @@ const styles: IStyles = {
     letterSpacing: '0.1em',
     lineHeight: '18px',
 
-    ...margin(10, null, null, null),
+    ...margin(6, null, null, null),
   },
 
   main: {
-    alignItems: 'center',
     backgroundColor: '#242838',
     borderRadius: '8px',
     display: 'flex',
@@ -34,13 +33,14 @@ const styles: IStyles = {
   voteCount: {
     color: '#FD2961',
     fontSize: '14px',
+    justifyContent: 'center',
+    lineHeight: '21px',
   },
 
   voteDown: {
     color: '#FD2961',
     cursor: 'pointer',
     lineHeight: 0,
-    transform: 'rotate(180deg)',
   },
 
   voteUp: {
@@ -50,9 +50,11 @@ const styles: IStyles = {
   },
 
   votes: {
-    alignItems: 'center',
+    // alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
+
+    // ...margin(10, null, 10, null),
   },
 };
 

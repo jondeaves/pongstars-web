@@ -1,3 +1,4 @@
+import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
 import React from 'react';
 import { useFela } from 'react-fela';
 
@@ -11,9 +12,13 @@ const SuggestionListItem: React.FC<IProps> = (props: IProps) => {
   return (
     <div className={css(styles.main)}>
       <div className={css(styles.votes)}>
-        <p className={css(styles.voteUp)}>^</p>
+        <p className={css(styles.voteUp)}>
+          <KeyboardArrowUp />
+        </p>
         <p className={css(styles.voteCount)}>{item.votes}</p>
-        <p className={css(styles.voteDown)}>^</p>
+        <p className={css(styles.voteDown)}>
+          <KeyboardArrowDown />
+        </p>
       </div>
       <div className={css(styles.content)}>
         <h4 className={css(styles.title)}>{item.title}</h4>
