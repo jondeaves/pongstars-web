@@ -9,14 +9,16 @@ const styles: IStyles = {
 
   viewAll: {
     alignItems: 'center',
-    color: '#FD2961',
     display: 'block',
-    fontSize: '16px',
-    fontWeight: 900,
-    letterSpacing: '0.1em',
+    fontSize: '11px',
     textTransform: 'uppercase',
 
-    ...padding(20, null, null, null),
+    ...padding(0, null, null, null),
+
+    atDesktop: {
+      fontSize: '16px',
+      ...padding(20, null, null, null),
+    },
   },
 };
 

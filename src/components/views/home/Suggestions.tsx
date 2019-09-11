@@ -1,9 +1,11 @@
 import Axios, { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { useFela } from 'react-fela';
 
 import IStoreResponse from '../../../types/IStoreResponse';
 import ISuggestion from '../../../types/ISuggestion';
+import IVote from '../../../types/IVote';
 
 import Loader from '../../shared/Loader';
 import Snackbar from '../../shared/Snackbar';
@@ -17,18 +19,26 @@ const Suggestion: React.FC<IProps> = (props: IProps) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [suggestions, setSuggestions] = useState<ISuggestion[]>([]);
   const [snackbarMessage, setSnackbarMessage] = useState<string>('');
+  const [cookies, setCookie] = useCookies(['suggestion-votes']);
+
+  const existingVotes: IVote[] = typeof cookies['suggestion-votes'] !== 'undefined' ? cookies['suggestion-votes'] : [];
 
   useEffect(() => {
     loadSuggestions();
   }, []);
 
-  const updateVotes = async (id: number, votes: number) => {
+  const updateVotes = async (id: number, votes: number, modifier: number) => {
+    if (existingVotes.findIndex(v => v.id === id) !== -1) {
+      // Already voted for this item
+      return;
+    }
+
     try {
       await Axios.patch(
         `${process.env.REACT_APP_API_ENDPOINT}store/pongstars/suggestions/${id}`,
         {
           payload: {
-            votes,
+            votes: votes + modifier,
           }
         },
         {
@@ -38,8 +48,14 @@ const Suggestion: React.FC<IProps> = (props: IProps) => {
         },
       );
 
+      existingVotes.push({
+        id,
+        up: modifier > 0
+      });
+
       setSnackbarMessage('');
       loadSuggestions();
+      setCookie('suggestion-votes', existingVotes);
     } catch (err) {
       setSnackbarMessage(err.message);
     }
@@ -86,7 +102,7 @@ const Suggestion: React.FC<IProps> = (props: IProps) => {
       </p>
 
       {loading && <Loader message="Loading popular suggestions" />}
-      {!loading && suggestions.length > 0 && <SuggestionList items={suggestions} updateVotes={updateVotes} />}
+      {!loading && suggestions.length > 0 && <SuggestionList items={suggestions} updateVotes={updateVotes} votes={existingVotes} />}
 
       <Snackbar message={snackbarMessage} onClose={onCloseSnackbar} />
     </div>

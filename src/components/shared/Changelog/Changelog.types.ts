@@ -8,5 +8,7 @@ export interface IProps {
 
 export interface IStyles {
   main: IStyle;
-  viewAll: IStyle;
+  viewAll: IStyle & {
+    atDesktop: IStyle;
+  };
 }

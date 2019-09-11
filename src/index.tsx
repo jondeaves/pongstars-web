@@ -1,4 +1,5 @@
 import React from 'react';
+import { CookiesProvider } from 'react-cookie';
 import ReactDOM from 'react-dom';
 import { RendererProvider as FelaProvider } from 'react-fela';
 
@@ -12,9 +13,11 @@ import 'reset-css';
 import './index.css';
 
 ReactDOM.render(
-  <FelaProvider renderer={renderer}>
-    <Layout />
-  </FelaProvider>,
+  <CookiesProvider>
+    <FelaProvider renderer={renderer}>
+      <Layout />
+    </FelaProvider>
+  </CookiesProvider>,
   document.getElementById('root')
 );
 

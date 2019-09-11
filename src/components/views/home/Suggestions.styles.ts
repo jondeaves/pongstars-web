@@ -15,7 +15,7 @@ const styles: IStyles = {
     display: 'flex',
   },
   title: {
-    ...margin(10, null, null, null),
+    ...margin(10, null, 12, null),
   },
 };
 

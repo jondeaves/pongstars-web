@@ -3,6 +3,11 @@ import { margin, padding } from 'polished';
 import { IStyles } from './SuggestionListItem.types';
 
 const styles: IStyles = {
+  active: {
+    color: '#FD2961',
+    cursor: 'inherit',
+  },
+
   content: {
     ...margin(5, null, null, 24),
   },
@@ -13,6 +18,15 @@ const styles: IStyles = {
     lineHeight: '18px',
 
     ...margin(6, null, null, null),
+  },
+
+  inactive: {
+    color: 'rgba(255, 255, 255, 0.6)',
+    cursor: 'inherit',
+
+    ':hover': {
+      color: 'rgba(255, 255, 255, 0.6)',
+    }
   },
 
   main: {
@@ -30,6 +44,18 @@ const styles: IStyles = {
     textTransform: 'uppercase',
   },
 
+  voteButton: {
+    color: 'rgba(255, 255, 255, 0.6)',
+    cursor: 'pointer',
+    lineHeight: 0,
+    transition: 'color 0.4s ease',
+
+    ':hover': {
+      color: '#FD2961',
+      transition: 'color 0.1s ease',
+    }
+  },
+
   voteCount: {
     color: '#FD2961',
     fontSize: '14px',
@@ -37,24 +63,9 @@ const styles: IStyles = {
     lineHeight: '21px',
   },
 
-  voteDown: {
-    color: '#FD2961',
-    cursor: 'pointer',
-    lineHeight: 0,
-  },
-
-  voteUp: {
-    color: '#FD2961',
-    cursor: 'pointer',
-    lineHeight: 0,
-  },
-
   votes: {
-    // alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
-
-    // ...margin(10, null, 10, null),
   },
 };
 
