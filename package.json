@@ -1,5 +1,6 @@
 {
   "name": "pongstars-web",
+  "description": "Collect ideas and feedback changes to the Pongstars community",
   "version": "0.1.0",
   "private": true,
   "author": "Jon Deaves <hello@jondeaves.me> (https://jondeaves.me/)",
