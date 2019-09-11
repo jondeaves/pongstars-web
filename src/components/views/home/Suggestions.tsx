@@ -2,8 +2,8 @@ import Axios, { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useFela } from 'react-fela';
 
+import IStoreResponse from '../../../types/IStoreResponse';
 import ISuggestion from '../../../types/ISuggestion';
-import ISuggestionsResp from '../../../types/ISuggestionResponse';
 
 import Loader from '../../shared/Loader';
 import Snackbar from '../../shared/Snackbar';
@@ -47,7 +47,7 @@ const Suggestion: React.FC<IProps> = (props: IProps) => {
 
   const loadSuggestions = async () => {
     try {
-      const resp: AxiosResponse<ISuggestionsResp> = await Axios.get(
+      const resp: AxiosResponse<IStoreResponse<ISuggestion>> = await Axios.get(
         `${process.env.REACT_APP_API_ENDPOINT}store/pongstars/suggestions?pageSize=5`,
         {
           headers: {
@@ -85,8 +85,8 @@ const Suggestion: React.FC<IProps> = (props: IProps) => {
         then leave us a suggestion below, if it get’s really popluar we’ll add it to our roadmap! XD
       </p>
 
-      {loading && <Loader />}
-      {!loading && <SuggestionList items={suggestions} updateVotes={updateVotes} />}
+      {loading && <Loader message="Loading popular suggestions" />}
+      {!loading && suggestions.length > 0 && <SuggestionList items={suggestions} updateVotes={updateVotes} />}
 
       <Snackbar message={snackbarMessage} onClose={onCloseSnackbar} />
     </div>

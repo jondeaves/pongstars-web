@@ -1,40 +1,84 @@
-import React from 'react';
+
+import Axios, { AxiosResponse } from 'axios';
+import { compareDesc, format } from 'date-fns'
+import React, { useEffect, useState } from 'react';
 import { useFela } from 'react-fela';
 
+import IChangelog from '../../../types/IChangelog';
 import IChangelogItems from '../../../types/IChangelogItems';
+import IStoreResponse from '../../../types/IStoreResponse';
+
 import Changelog from '../../shared/Changelog';
+import Loader from '../../shared/Loader';
 
 import styles from './Recent.styles';
 import { IProps } from './Recent.types';
 
-const changelogItems: IChangelogItems[] = [
-  {
-    date: '2019-09-05',
-    items: [
-      {
-        description:
-          'Sick of having to pick people to challenge? Why not send an open challenge and leave the decision making up to others.',
-        title: 'Added open challenges',
-      },
-      {
-        description: 'Now it’s hella slick.',
-        title: 'Fixed loading animation',
-      },
-    ],
-  },
-  {
-    date: '2019-09-01',
-    items: [
-      {
-        description: 'Now you can upload a personalised avatar to the app - no 8=====D plz',
-        title: 'Avatars!',
-      },
-    ],
-  },
-];
-
 const Recent: React.FC<IProps> = (props: IProps) => {
   const { css } = useFela<null, IProps>(props);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [changelog, setChangelog] = useState<IChangelogItems[]>([]);
+
+  useEffect(() => {
+    loadChangelog();
+  }, []);
+
+  const loadChangelog = async () => {
+    try {
+      const resp: AxiosResponse<IStoreResponse<IChangelog>> = await Axios.get(
+        `${process.env.REACT_APP_API_ENDPOINT}store/pongstars/changelog?pageSize=5`,
+        {
+          headers: {
+            Authorization: process.env.REACT_APP_API_KEY,
+          },
+        },
+      );
+
+      // Parse results
+      const tmpChangelogEntries = resp.data.data
+        .map(suggestionResp => ({
+          date: suggestionResp.payload.date,
+          description: suggestionResp.payload.description,
+          id: suggestionResp.id,
+          title: suggestionResp.payload.title,
+        }));
+
+      // Sort results
+      tmpChangelogEntries.sort((itemA, itemB) => {
+        return compareDesc(new Date(itemA.date), new Date(itemB.date));
+      });
+
+      // Format to changelog items
+      const entries: IChangelogItems[] = [];
+
+      tmpChangelogEntries.forEach(entry => {
+        // Do we have an entry for this date already?
+        const formattedDate = format(new Date(entry.date), 'dd.MM')
+        const matchedIndex = entries.findIndex(e => e.date === formattedDate);
+
+        if (matchedIndex === -1) {
+          entries.push({
+            date: formattedDate,
+            items: [{
+              description: entry.description,
+              title: entry.title,
+            }],
+          });
+        } else {
+          entries[matchedIndex].items.push({
+            description: entry.description,
+            title: entry.title,
+          });
+        }
+      });
+
+      setLoading(false);
+      setChangelog(entries);
+    } catch (err) {
+      setLoading(false);
+      setChangelog([]);
+    }
+  };
 
   return (
     <div className={css(styles.main)}>
@@ -44,7 +88,8 @@ const Recent: React.FC<IProps> = (props: IProps) => {
         then leave us a suggestion below, if it get’s really popluar we’ll add it to our roadmap! XD
       </p>
 
-      <Changelog items={changelogItems} />
+      {loading && <Loader message="Loading recent updates" />}
+      {!loading && changelog.length > 0 && <Changelog items={changelog} />}
     </div>
   );
 };

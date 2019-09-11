@@ -5,7 +5,7 @@ import SnackbarContent from '@material-ui/core/SnackbarContent';
 import CloseIcon from '@material-ui/icons/Close';
 import ErrorIcon from '@material-ui/icons/Error';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useFela } from 'react-fela';
 
 import styles from './Snackbar.styles';

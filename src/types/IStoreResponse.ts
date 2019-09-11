@@ -1,6 +1,4 @@
-import ISuggestion from './ISuggestion';
-
-export default interface ISuggestionsResp {
+export default interface IStoreResponse<T> {
   meta: {
     totalPages: number;
     totalRecords: number;
@@ -16,7 +14,7 @@ export default interface ISuggestionsResp {
   };
   data: Array<{
     id: number;
-    payload: ISuggestion;
+    payload: T;
     createdAt: string;
     updatedAt: string;
   }>;
