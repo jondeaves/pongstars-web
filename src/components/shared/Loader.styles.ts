@@ -14,7 +14,7 @@ const styles: IStyles = {
 
   message: {
     fontSize: '14px',
-  }
+  },
 };
 
 export default styles;

@@ -3,6 +3,9 @@ import { margin } from 'polished';
 import { IStyles } from './Suggestions.types';
 
 const styles: IStyles = {
+  description: {
+    ...margin(null, null, 30, null),
+  },
   main: {},
   snackbar: {
     backgroundColor: '#B00020!important',
@@ -13,9 +16,6 @@ const styles: IStyles = {
   snackbarMessage: {
     alignItems: 'center',
     display: 'flex',
-  },
-  subTitle: {
-    ...margin(0, null, 37, null),
   },
   title: {
     ...margin(10, null, 12, null),

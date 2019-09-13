@@ -79,7 +79,7 @@ p {
   display: flex;
   align-items: center;
 
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.6)!important;
 }
 
 a, a:visited, a:active, a:hover {
@@ -102,4 +102,13 @@ a:hover {
   h4 { font-size: 17px; }
   h5 { font-size: 14px; }
   p { font-size: 17px; line-height: 24px; }
+}
+
+
+label {
+  color: rgba(255, 255, 255, 0.6)!important;
+}
+
+input, textarea {
+  color: rgba(255, 255, 255, 0.87)!important;
 }

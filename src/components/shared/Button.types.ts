@@ -5,6 +5,8 @@ export interface IProps {
   label: string;
   link?: string;
   spaced?: boolean;
+  onClick?: any;
+  type?: 'submit' | 'button';
 }
 
 export interface IStyles {

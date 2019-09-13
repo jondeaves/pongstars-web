@@ -4,10 +4,9 @@ import { IStyle } from 'fela';
 export interface IProps {}
 
 export interface IStyles {
+  formWrapper: IStyle;
   main: IStyle;
-  snackbar: IStyle;
-  snackbarIcon: IStyle;
-  snackbarMessage: IStyle;
+  textField: any;
   title: IStyle;
-  description: IStyle;
+  toggleIcon: IStyle;
 }

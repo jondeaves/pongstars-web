@@ -4,10 +4,10 @@ import { IStyles } from './SuggestionList.types';
 
 const styles: IStyles = {
   main: {
-    ...margin(45, null, null, null),
+    ...margin(5, null, null, null),
 
     atDesktop: {
-      ...margin(40, null, null, null),
+      ...margin(5, null, null, null),
     },
   },
 

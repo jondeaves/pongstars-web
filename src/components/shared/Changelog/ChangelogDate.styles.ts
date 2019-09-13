@@ -15,7 +15,7 @@ const styles: IStyles = {
 
       '&:before': {
         background: '#313545',
-        borderRadius: '4px',
+        borderRadius: 4,
         content: '" "',
         height: 'calc(100% - 28px)',
         left: 44,

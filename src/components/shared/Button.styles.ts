@@ -12,17 +12,20 @@ const labelStyles = {
 };
 
 const styles: IStyles = {
-  main: ({ spaced }) => ({
+  main: ({ onClick, spaced }) => ({
     background: 'linear-gradient(102.26deg, #FD2961 0%, #FF1D97 95.75%)',
+    border: 'none',
     borderRadius: 4,
+    cursor: onClick ? 'pointer' : 'inherit',
     display: 'inline-block',
+    outline: 'none',
     position: 'relative',
     zIndex: 1,
 
     ...margin(spaced ? 20 : null, null, null, null),
 
     ':hover': {
-      '> div': {
+      '> span:first-child': {
         backgroundColor: 'rgba(67, 77, 115, 0.25)',
       },
     },
