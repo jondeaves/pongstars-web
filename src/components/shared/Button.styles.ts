@@ -1,4 +1,4 @@
-import { padding } from 'polished';
+import { margin, padding } from 'polished';
 
 import { IStyles } from './Button.types';
 
@@ -12,12 +12,14 @@ const labelStyles = {
 };
 
 const styles: IStyles = {
-  main: {
+  main: ({ spaced }) => ({
     background: 'linear-gradient(102.26deg, #FD2961 0%, #FF1D97 95.75%)',
     borderRadius: 4,
     display: 'inline-block',
     position: 'relative',
     zIndex: 1,
+
+    ...margin(spaced ? 20 : null, null, null, null),
 
     ':hover': {
       '> div': {
@@ -26,7 +28,7 @@ const styles: IStyles = {
     },
 
     ...(labelStyles as any),
-  },
+  }),
 
   overlay: {
     backgroundColor: 'transparent',

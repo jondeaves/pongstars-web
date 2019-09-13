@@ -107,12 +107,6 @@ const Changelog: React.FC<IProps> = (props: IProps) => {
           <Link to="/updates">View All</Link>
         </p>
       )}
-
-      {!limit && (
-        <p className={css(styles.viewAll)}>
-          <Link to="/">Back Home</Link>
-        </p>
-      )}
     </div>
   );
 };

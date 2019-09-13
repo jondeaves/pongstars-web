@@ -27,4 +27,8 @@ const Button: React.FC<IProps> = (props: IProps) => {
   );
 };
 
+Button.defaultProps = {
+  spaced: false,
+};
+
 export default Button;

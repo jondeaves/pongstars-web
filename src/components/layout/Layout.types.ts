@@ -13,4 +13,7 @@ export interface IStyles {
   right: IStyle & {
     atDesktop: IStyle;
   };
+  logo: IStyle & {
+    atDesktop: IStyle;
+  };
 }

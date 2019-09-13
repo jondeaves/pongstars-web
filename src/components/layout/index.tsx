@@ -19,7 +19,7 @@ const Layout: React.FC<IProps> = (props: IProps) => {
     <div className={css(styles.main)}>
       <div className={css(styles.left)}>
         <Link to="/">
-          <Logo width={88} height={72} />
+          <Logo className={css(styles.logo)} />
         </Link>
       </div>
       <div className={css(styles.right)}>

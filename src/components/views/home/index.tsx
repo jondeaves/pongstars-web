@@ -5,10 +5,10 @@ import Suggestions from './Suggestions';
 
 const Home: React.FC = () => {
   return (
-    <div>
+    <React.Fragment>
       <Recent />
       <Suggestions />
-    </div>
+    </React.Fragment>
   );
 };
 

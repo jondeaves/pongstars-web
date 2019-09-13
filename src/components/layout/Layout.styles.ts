@@ -10,6 +10,7 @@ const styles: IStyles = {
     textAlign: 'center',
     top: 0,
     width: '100%',
+    zIndex: 10,
 
     ...padding(20),
 
@@ -33,10 +34,20 @@ const styles: IStyles = {
   right: {
     backgroundColor: '#111525',
     flexGrow: 1,
-    ...padding(156, 16, 66, 24),
+    ...padding(122, 16, 66, 24),
 
     atDesktop: {
       ...padding(36, null, null, 192),
+    },
+  },
+
+  logo: {
+    height: 38,
+    width: 46,
+
+    atDesktop: {
+      height: 72,
+      width: 88,
     },
   },
 };
