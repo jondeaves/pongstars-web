@@ -14,6 +14,9 @@ const styles: IStyles = {
     alignItems: 'center',
     display: 'flex',
   },
+  subTitle: {
+    ...margin(0, null, 37, null),
+  },
   title: {
     ...margin(10, null, 12, null),
   },

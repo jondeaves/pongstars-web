@@ -9,4 +9,5 @@ export interface IStyles {
   snackbarIcon: IStyle;
   snackbarMessage: IStyle;
   title: IStyle;
+  subTitle: IStyle;
 }

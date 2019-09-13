@@ -13,15 +13,13 @@ const SuggestionListItem: React.FC<IProps> = (props: IProps) => {
   const hasVotedUp = typeof votedItem !== 'undefined' && votedItem.up === true;
   const hasVotedDown = typeof votedItem !== 'undefined' && votedItem.up === false;
 
-  console.log(`ID: ${item.id} | Up: ${hasVotedUp} | Down: ${hasVotedDown}`);
-
   const onVoteUp = () => {
     updateVotes(item.id, item.votes, 1);
-  }
+  };
 
   const onVoteDown = () => {
     updateVotes(item.id, item.votes, -1);
-  }
+  };
 
   const upVoteStyles: any[] = [styles.voteButton];
   const downVoteStyles: any[] = [styles.voteButton];

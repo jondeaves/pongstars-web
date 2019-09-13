@@ -1,4 +1,4 @@
-import { margin } from 'polished';
+import { margin, padding } from 'polished';
 
 import { IStyles } from './SuggestionList.types';
 
@@ -7,12 +7,22 @@ const styles: IStyles = {
     ...margin(45, null, null, null),
 
     atDesktop: {
-      ...margin(65, null, null, null),
+      ...margin(40, null, null, null),
     },
   },
 
-  title: {
-    ...margin(0, null, 17, null),
+  viewAll: {
+    alignItems: 'center',
+    display: 'block',
+    fontSize: '11px',
+    textTransform: 'uppercase',
+
+    ...padding(0, null, null, null),
+
+    atDesktop: {
+      fontSize: '16px',
+      ...padding(20, null, null, null),
+    },
   },
 };
 
