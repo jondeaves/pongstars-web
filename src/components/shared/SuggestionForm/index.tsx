@@ -5,6 +5,7 @@ import { useFela } from 'react-fela';
 
 import Button from '../../shared/Button';
 
+import { createSuggestion } from '../SuggestionList/helpers';
 import styles from './SuggestionForm.styles';
 import { IProps } from './SuggestionForm.types';
 
@@ -12,11 +13,14 @@ const SuggestionForm: React.FC<IProps> = (props: IProps) => {
   const { css } = useFela<null, IProps>(props);
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
+  const [saving, setSaving] = useState<boolean>(false);
 
   const onSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
-    alert('coming soon');
-
     evt.preventDefault();
+
+    setSaving(true);
+
+    createSuggestion(title, description, setSaving);
   };
 
   const onTitleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,6 +30,8 @@ const SuggestionForm: React.FC<IProps> = (props: IProps) => {
   const onDescriptionChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setDescription(evt.currentTarget.value);
   };
+
+  const disableBtn = title.length < 3 || saving;
 
   return (
     <ExpansionPanel className={css(styles.main)} square={false}>
@@ -41,9 +47,9 @@ const SuggestionForm: React.FC<IProps> = (props: IProps) => {
           <TextField
             className={css(styles.textField)}
             id="title"
-            label="Title"
+            label="Title *"
             value={title}
-            helperText="Short descriptive text"
+            helperText="Short descriptive text, at least 3 characters"
             margin="dense"
             fullWidth={true}
             onChange={onTitleChange}
@@ -54,7 +60,7 @@ const SuggestionForm: React.FC<IProps> = (props: IProps) => {
             id="description"
             label="Description"
             value={description}
-            helperText="Detailed suggestion"
+            helperText="Optional detailed suggestion"
             multiline={true}
             rowsMax="6"
             margin="dense"
@@ -62,7 +68,13 @@ const SuggestionForm: React.FC<IProps> = (props: IProps) => {
             onChange={onDescriptionChange}
           />
 
-          <Button label="Send Suggestion" spaced={true} onClick={onSubmit} />
+          <Button
+            disabled={disableBtn}
+            spaced={true}
+            onClick={onSubmit}
+            loading={saving}
+            label="Send Suggestion"
+          />
         </form>
       </ExpansionPanelDetails>
     </ExpansionPanel>

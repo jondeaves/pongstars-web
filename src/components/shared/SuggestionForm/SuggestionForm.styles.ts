@@ -1,5 +1,3 @@
-import { margin } from 'polished';
-
 import { IStyles } from './SuggestionForm.types';
 
 const styles: IStyles = {

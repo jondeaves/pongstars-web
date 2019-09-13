@@ -6,6 +6,32 @@ import IStoreResponse from '../../../types/IStoreResponse';
 import ISuggestion from '../../../types/ISuggestion';
 import IVote from '../../../types/IVote';
 
+export const createSuggestion = async (
+  title: string,
+  description: string,
+  setSaving: Dispatch<SetStateAction<boolean>>,
+) => {
+  Axios.post(`${process.env.REACT_APP_API_ENDPOINT}store/pongstars/suggestions`, {
+    payload: {
+      description,
+      title,
+      votes: 0,
+    }
+  }, {
+    headers: {
+      Authorization: process.env.REACT_APP_API_KEY,
+    }
+  })
+  .then(() => {
+    window.location.reload();
+  })
+  // tslint:disable-next-line:no-console
+  .catch(console.error)
+  .finally(() => {
+    setSaving(false);
+  });
+}
+
 export const loadSuggestions = async (
   setLoading: Dispatch<SetStateAction<boolean>>,
   setSuggestions: Dispatch<SetStateAction<ISuggestion[]>>,
@@ -13,9 +39,9 @@ export const loadSuggestions = async (
   limit: number | undefined,
 ) => {
   try {
-    let url = `${process.env.REACT_APP_API_ENDPOINT}store/pongstars/suggestions`;
+    let url = `${process.env.REACT_APP_API_ENDPOINT}store/pongstars/suggestions?sort=-votes`;
     if (limit) {
-      url += `?pageSize=${limit}`;
+      url += `&pageSize=${limit}`;
     }
 
     const resp: AxiosResponse<IStoreResponse<ISuggestion>> = await Axios.get(url, {

@@ -2,21 +2,21 @@ import { margin, padding } from 'polished';
 
 import { IStyles } from './Button.types';
 
-const labelStyles = {
-  color: 'rgba(255, 255, 255, 0.87)',
+const labelStyles = (disabled: boolean | undefined) => ({
+  color: disabled ? 'rgba(255, 255, 255, 0.6)' : 'rgba(255, 255, 255, 0.87)',
   fontSize: 14,
   fontWeight: 'bolder',
   letterSpacing: '0.1em',
   lineHeight: 0,
   textTransform: 'uppercase',
-};
+});
 
 const styles: IStyles = {
-  main: ({ onClick, spaced }) => ({
-    background: 'linear-gradient(102.26deg, #FD2961 0%, #FF1D97 95.75%)',
+  main: ({ disabled, onClick, spaced }) => ({
+    background: disabled ? 'rgba(253, 41, 97, 0.1)' : 'linear-gradient(102.26deg, #FD2961 0%, #FF1D97 95.75%)',
     border: 'none',
     borderRadius: 4,
-    cursor: onClick ? 'pointer' : 'inherit',
+    cursor: onClick && !disabled ? 'pointer' : 'inherit',
     display: 'inline-block',
     outline: 'none',
     position: 'relative',
@@ -26,11 +26,11 @@ const styles: IStyles = {
 
     ':hover': {
       '> span:first-child': {
-        backgroundColor: 'rgba(67, 77, 115, 0.25)',
+        backgroundColor: disabled ? 'transparent': 'rgba(67, 77, 115, 0.25)',
       },
     },
 
-    ...(labelStyles as any),
+    ...(labelStyles(disabled) as any),
   }),
 
   overlay: {
@@ -44,19 +44,19 @@ const styles: IStyles = {
     zIndex: 2,
   },
 
-  label: {
+  label: ({ loading }) => ({
     boxSizing: 'border-box',
     display: 'inline-block',
     position: 'relative',
     zIndex: 3,
 
     ...(labelStyles as any),
-    ...padding(22, 32),
+    ...padding(loading ? 7 : 22, 32),
 
     ':hover': {
       ...(labelStyles as any),
     },
-  },
+  }),
 };
 
 export default styles;
