@@ -2,6 +2,7 @@ import React from 'react';
 import { CookiesProvider } from 'react-cookie';
 import ReactDOM from 'react-dom';
 import { RendererProvider as FelaProvider } from 'react-fela';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import { renderer } from './config/Fela';
 
@@ -15,10 +16,12 @@ import './index.css';
 ReactDOM.render(
   <CookiesProvider>
     <FelaProvider renderer={renderer}>
-      <Layout />
+      <Router>
+        <Layout />
+      </Router>
     </FelaProvider>
   </CookiesProvider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change

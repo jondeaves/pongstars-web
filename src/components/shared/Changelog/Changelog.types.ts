@@ -1,9 +1,7 @@
 import { IStyle } from 'fela';
 
-import IChangelogItems from '../../../types/IChangelogItems';
-
 export interface IProps {
-  items: IChangelogItems[];
+  limit?: number;
 }
 
 export interface IStyles {

@@ -1,4 +1,4 @@
-import { IStyle } from 'fela'
+import { IStyle } from 'fela';
 
 // tslint:disable-next-line:no-empty-interface
 export interface IProps {}

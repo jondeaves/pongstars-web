@@ -5,6 +5,7 @@ import { IStyles } from './Changelog.types';
 const styles: IStyles = {
   main: {
     ...margin(40, null, 20, null),
+    ...padding(null, null, 10, null),
   },
 
   viewAll: {
