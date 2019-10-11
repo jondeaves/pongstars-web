@@ -14,7 +14,7 @@ const Recent: React.FC<IProps> = (props: IProps) => {
       <h1>Recent Updates</h1>
       <p>
         Welcome to the PongStars feature request area. If you’ve got any ideas you think would really improve the app
-        then leave us a suggestion below, if it get’s really popluar we’ll add it to our roadmap! XD
+        then leave us a suggestion below, if it get’s really popular we’ll add it to our roadmap! XD
       </p>
 
       <Changelog limit={5} />
